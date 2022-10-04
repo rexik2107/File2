@@ -1,0 +1,9 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\rexik\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\rexik\\.nuget\\packages",
+      "E:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+    ]
+  }
+}
