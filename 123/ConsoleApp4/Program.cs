@@ -17,6 +17,7 @@ namespace HelloApp
     }
     class Program
     {
+        //архивация, имя файла и имя архива
         public static void Compress(string sourceFile, string compressedFile)
         {
             // поток для чтения исходного файла
@@ -36,6 +37,7 @@ namespace HelloApp
             }
         }
 
+        //разархивация, имя архива и имя файла
         public static void Decompress(string compressedFile, string targetFile)
         {
             // поток для чтения из сжатого файла
@@ -47,7 +49,7 @@ namespace HelloApp
                     // поток разархивации
                     using (GZipStream decompressionStream = new GZipStream(sourceStream, CompressionMode.Decompress))
                     {
-                        decompressionStream.CopyTo(targetStream);
+                        decompressionStream.CopyTo(targetStream); // копируем байты из одного потока в другой
                         Console.WriteLine("Восстановлен файл: {0}", targetFile);
                     }
                 }
@@ -55,6 +57,7 @@ namespace HelloApp
         }
         static void Main(string[] args)
         {
+            //вывод инфы о дисках
             DriveInfo[] drives = DriveInfo.GetDrives();
 
             foreach (DriveInfo drive in drives)
@@ -104,7 +107,9 @@ namespace HelloApp
                 // File.Delete(path);
             }
 
+            //создание объекта класса
             Person tom = new Person { Name = "Tom", Age = 35, Company = "NDMedia", Supervisor = "Nikita", Money = 4000 };
+            //преобазование данных в JSON
             string json = JsonSerializer.Serialize<Person>(tom);
             using (FileStream fstream = new FileStream($"test.json", FileMode.OpenOrCreate))
             {
@@ -140,6 +145,7 @@ namespace HelloApp
 
 
 
+            //работа с XML файлом
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load("test.xml");
 
@@ -169,6 +175,7 @@ namespace HelloApp
             xDoc.Save("test.xml");
 
 
+            //чтение XML и вывод в консоль 
             foreach (XmlNode xnode in xRoot)
             {
                 // получаем атрибут name
@@ -207,8 +214,8 @@ namespace HelloApp
 
             Compress("compressme.xml", "zipfile.zip");
 
-            // Создать архив в формате zip
-            // Добавить файл, выбранный пользователем, в архив
+            
+            // Добавить файл пользователя, в архив
             Console.WriteLine("Имя файла для сжатия:");
             var f_name = Console.ReadLine();
             if (f_name == null)
